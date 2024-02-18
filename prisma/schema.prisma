@@ -1,9 +1,14 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+// Env vars
+// look at scripts for using different .env.* files
+// "prisma:migrate:dev" for .env, .env.development, .env.local, and .env.development.local
+// "prisma:migrate:local" .env.development
+
 datasource db {
-  provider  = "postgresql"
-  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
 }
 
 generator client {
