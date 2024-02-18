@@ -26,9 +26,13 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
+### local env files
+# may want to remove just .env* for nextjs/vercel
+# https://vercel.com/docs/projects/environment-variables#development-environment-variables
 .env*
+#
 !.env*.example
+.env.*.local
 
 # vercel
 .vercel
