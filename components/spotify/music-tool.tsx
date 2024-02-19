@@ -8,8 +8,7 @@ export default function MusicTool() {
     <Container>
       <Grid container spacing={2}>
         <Grid xs={12}>
-
-        <h1>music</h1>
+          <h1>music</h1>
         </Grid>
       </Grid>
     </Container>

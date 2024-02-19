@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function PostCard({
   data,
 }: {
-  data: Post & { site: Site | null };
+  data: Post & { site?: Site | null };
 }) {
   const url = `${data.site?.subdomain}.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}/${data.slug}`;
 
