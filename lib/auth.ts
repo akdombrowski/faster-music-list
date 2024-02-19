@@ -1,4 +1,9 @@
-import { getServerSession, type NextAuthOptions } from "next-auth";
+import SpotifyUser, {
+  Awaitable,
+  getServerSession,
+  User,
+  type NextAuthOptions,
+} from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
@@ -24,13 +29,19 @@ export const authOptions: NextAuthOptions = {
     SpotifyProvider({
       clientId: process.env.AUTH_SPOTIFY_ID as string,
       clientSecret: process.env.AUTH_SPOTIFY_SECRET as string,
+      authorization: {
+        params: {
+          // https://developer.spotify.com/documentation/web-api/concepts/scopes#user-read-playback-position
+          scope:
+            "user-read-private user-read-email user-read-recently-played user-top-read user-follow-read user-read-playback-position playlist-modify-public playlist-modify-private playlist-read-collaborative playlist-read-private user-read-currently-playing user-read-playback-state ",
+        },
+      },
       profile(profile) {
         return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          spotify_username: profile.login,
+          id: profile.id,
+          display_name: profile.display_name,
           email: profile.email,
-          image: profile.avatar_url,
+          images: profile.images,
         };
       },
     }),
