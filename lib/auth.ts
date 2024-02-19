@@ -1,5 +1,6 @@
 import { getServerSession, type NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
+import SpotifyProvider from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
 
@@ -15,6 +16,19 @@ export const authOptions: NextAuthOptions = {
           id: profile.id.toString(),
           name: profile.name || profile.login,
           gh_username: profile.login,
+          email: profile.email,
+          image: profile.avatar_url,
+        };
+      },
+    }),
+    SpotifyProvider({
+      clientId: process.env.AUTH_SPOTIFY_ID as string,
+      clientSecret: process.env.AUTH_SPOTIFY_SECRET as string,
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name || profile.login,
+          spotify_username: profile.login,
           email: profile.email,
           image: profile.avatar_url,
         };
