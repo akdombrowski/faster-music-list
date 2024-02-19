@@ -4,11 +4,16 @@ import { Analytics } from "@vercel/analytics/react";
 import { Providers } from "./providers";
 import { Metadata } from "next";
 import { cn } from "@/lib/utils";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
 
 const title =
-  "Platforms Starter Kit – The all-in-one starter kit for building multi-tenant applications.";
+  "Music Tool";
 const description =
-  "The Platforms Starter Kit is a full-stack Next.js app with multi-tenancy and custom domain support. Built with Next.js App Router, Vercel Postgres and the Vercel Domains API.";
+  "Tool to music";
 const image = "https://vercel.pub/thumbnail.png";
 
 export const metadata: Metadata = {
@@ -25,9 +30,9 @@ export const metadata: Metadata = {
     title,
     description,
     images: [image],
-    creator: "@vercel",
+    creator: "@akdombrowski",
   },
-  metadataBase: new URL("https://vercel.pub"),
+  metadataBase: new URL("https://akdombrowski.com"),
 };
 
 export default function RootLayout({

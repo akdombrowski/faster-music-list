@@ -1,5 +1,6 @@
 import { InlineSnippet } from "@/components/form/domain-configuration";
 import Image from "next/image";
+import MusicTool from "@/components/spotify/music-tool";
 
 export default function HomePage() {
   return (
@@ -11,12 +12,7 @@ export default function HomePage() {
         alt="Platforms on Vercel"
         className="w-48"
       />
-      <h1 className="text-white">
-        Edit this page on{" "}
-        <InlineSnippet className="ml-2 bg-blue-900 text-blue-100">
-          app/home/page.tsx
-        </InlineSnippet>
-      </h1>
+      <MusicTool />
     </div>
   );
 }
