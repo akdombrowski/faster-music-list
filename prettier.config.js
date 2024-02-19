@@ -10,6 +10,6 @@ module.exports = {
   htmlWhitespaceSensitivity: "strict",
   proseWrap: "always",
   quoteProps: "consistent",
-  singleAttributePerLine: true,
+  singleAttributePerLine: false,
   plugins: ["prettier-plugin-tailwindcss"],
 };

@@ -42,10 +42,7 @@ export default async function Posts({
   return posts.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {posts.map((post: Post) => (
-        <PostCard
-          key={post.id}
-          data={post}
-        />
+        <PostCard key={post.id} data={post} />
       ))}
     </div>
   ) : (

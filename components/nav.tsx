@@ -55,10 +55,7 @@ const externalLinks = [
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         className="py-1 text-black dark:text-white">
-        <path
-          d="M37.5274 0L75.0548 65H0L37.5274 0Z"
-          fill="currentColor"
-        />
+        <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor" />
       </svg>
     ),
   },

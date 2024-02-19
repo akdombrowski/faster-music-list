@@ -30,9 +30,7 @@ export function ModalProvider({ children }: { children: ReactNode }) {
     <ModalContext.Provider value={{ show, hide }}>
       {children}
       {showModal && (
-        <Modal
-          showModal={showModal}
-          setShowModal={setShowModal}>
+        <Modal showModal={showModal} setShowModal={setShowModal}>
           {modalContent}
         </Modal>
       )}

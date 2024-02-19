@@ -129,10 +129,7 @@ export default async function SiteHomePage({
           </h2>
           <div className="grid w-full grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 xl:grid-cols-3">
             {posts.slice(1).map((metadata: any, index: number) => (
-              <BlogCard
-                key={index}
-                data={metadata}
-              />
+              <BlogCard key={index} data={metadata} />
             ))}
           </div>
         </div>
