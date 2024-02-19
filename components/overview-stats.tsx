@@ -9,11 +9,11 @@ export default function OverviewStats() {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
     return [
       ...months.map((month) => ({
-        Month: `${month} 23`,
+        "Month": `${month} 23`,
         "Total Visitors": random(20000, 170418),
       })),
       {
-        Month: "Jul 23",
+        "Month": "Jul 23",
         "Total Visitors": 170418,
       },
     ];
@@ -26,13 +26,11 @@ export default function OverviewStats() {
         <Flex
           className="space-x-3 truncate"
           justifyContent="start"
-          alignItems="baseline"
-        >
+          alignItems="baseline">
           <Metric className="font-cal">170,418</Metric>
           <BadgeDelta
             deltaType="moderateIncrease"
-            className="dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400"
-          >
+            className="dark:bg-green-900 dark:bg-opacity-50 dark:text-green-400">
             34.3%
           </BadgeDelta>
         </Flex>

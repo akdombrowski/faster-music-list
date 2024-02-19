@@ -58,8 +58,7 @@ export default function Modal({
                     if (desktopModalRef.current === e.target) {
                       setShowModal(false);
                     }
-                  }}
-                >
+                  }}>
                   {children}
                 </motion.div>
               </FocusTrap>

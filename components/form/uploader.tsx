@@ -51,8 +51,7 @@ export default function Uploader({
             "max-w-screen-md": aspectRatio === "aspect-video",
             "max-w-xs": aspectRatio === "aspect-square",
           },
-        )}
-      >
+        )}>
         <div
           className="absolute z-[5] h-full w-full rounded-md"
           onDragOver={(e) => {
@@ -87,8 +86,7 @@ export default function Uploader({
             data[name]
               ? "bg-white/80 opacity-0 hover:opacity-100 hover:backdrop-blur-md"
               : "bg-white opacity-100 hover:bg-gray-50"
-          }`}
-        >
+          }`}>
           <svg
             className={`${
               dragActive ? "scale-110" : "scale-100"
@@ -101,8 +99,7 @@ export default function Uploader({
             stroke="currentColor"
             strokeWidth="2"
             strokeLinecap="round"
-            strokeLinejoin="round"
-          >
+            strokeLinejoin="round">
             <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
             <path d="M12 12v9"></path>
             <path d="m16 16-4-4-4 4"></path>

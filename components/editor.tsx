@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import { Post } from "@prisma/client";
+import { Post } from "@/prisma/generated/client";
 import { updatePost, updatePostMetadata } from "@/lib/actions";
 import { Editor as NovelEditor } from "novel";
 import TextareaAutosize from "react-textarea-autosize";
@@ -39,15 +39,14 @@ export default function Editor({ post }: { post: PostWithSite }) {
   }, [data, startTransitionSaving]);
 
   return (
-    <div className="relative min-h-[500px] w-full max-w-screen-lg border-stone-200 p-12 px-8 dark:border-stone-700 sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg">
+    <div className="relative min-h-[500px] w-full max-w-screen-lg border-stone-200 p-12 px-8 sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg dark:border-stone-700">
       <div className="absolute right-5 top-5 mb-5 flex items-center space-x-3">
         {data.published && (
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center space-x-1 text-sm text-stone-400 hover:text-stone-500"
-          >
+            className="flex items-center space-x-1 text-sm text-stone-400 hover:text-stone-500">
             <ExternalLink className="h-4 w-4" />
           </a>
         )}
@@ -78,8 +77,7 @@ export default function Editor({ post }: { post: PostWithSite }) {
               ? "cursor-not-allowed border-stone-200 bg-stone-100 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
               : "border border-black bg-black text-white hover:bg-white hover:text-black active:bg-stone-100 dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
           )}
-          disabled={isPendingPublishing}
-        >
+          disabled={isPendingPublishing}>
           {isPendingPublishing ? (
             <LoadingDots />
           ) : (

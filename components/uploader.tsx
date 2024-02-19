@@ -62,8 +62,7 @@ export default function Uploader() {
                       className="font-medium text-gray-900 underline"
                       href={url}
                       target="_blank"
-                      rel="noopener noreferrer"
-                    >
+                      rel="noopener noreferrer">
                       {url}
                     </a>
                   </p>
@@ -76,8 +75,7 @@ export default function Uploader() {
           }
           setSaving(false);
         });
-      }}
-    >
+      }}>
       <div>
         <div className="mb-4 space-y-1">
           <h2 className="text-xl font-semibold">Upload a file</h2>
@@ -87,8 +85,7 @@ export default function Uploader() {
         </div>
         <label
           htmlFor="image-upload"
-          className="group relative mt-2 flex h-72 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 bg-white shadow-sm transition-all hover:bg-gray-50"
-        >
+          className="group relative mt-2 flex h-72 cursor-pointer flex-col items-center justify-center rounded-md border border-gray-300 bg-white shadow-sm transition-all hover:bg-gray-50">
           <div
             className="absolute z-[5] h-full w-full rounded-md"
             onDragOver={(e) => {
@@ -136,8 +133,7 @@ export default function Uploader() {
               data.image
                 ? "bg-white/80 opacity-0 hover:opacity-100 hover:backdrop-blur-md"
                 : "bg-white opacity-100 hover:bg-gray-50"
-            }`}
-          >
+            }`}>
             <svg
               className={`${
                 dragActive ? "scale-110" : "scale-100"
@@ -150,8 +146,7 @@ export default function Uploader() {
               stroke="currentColor"
               strokeWidth="2"
               strokeLinecap="round"
-              strokeLinejoin="round"
-            >
+              strokeLinejoin="round">
               <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path>
               <path d="M12 12v9"></path>
               <path d="m16 16-4-4-4 4"></path>
@@ -191,8 +186,7 @@ export default function Uploader() {
           saveDisabled
             ? "cursor-not-allowed border-gray-200 bg-gray-100 text-gray-400"
             : "border-black bg-black text-white hover:bg-white hover:text-black"
-        } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
-      >
+        } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}>
         {saving ? (
           <LoadingDots color="#808080" />
         ) : (

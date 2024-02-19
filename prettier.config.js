@@ -1,9 +1,15 @@
 /** @type {import('prettier').Config} */
 module.exports = {
   bracketSpacing: true,
-  semi: true,
-  trailingComma: "all",
   printWidth: 80,
+  trailingComma: "all",
   tabWidth: 2,
+  semi: true,
+  singleQuote: false,
+  bracketSameLine: true,
+  htmlWhitespaceSensitivity: "strict",
+  proseWrap: "always",
+  quoteProps: "consistent",
+  singleAttributePerLine: true,
   plugins: ["prettier-plugin-tailwindcss"],
 };

@@ -32,8 +32,7 @@ export default function Overview() {
                 <PlaceholderCard key={i} />
               ))}
             </div>
-          }
-        >
+          }>
           <Sites limit={4} />
         </Suspense>
       </div>
@@ -49,8 +48,7 @@ export default function Overview() {
                 <PlaceholderCard key={i} />
               ))}
             </div>
-          }
-        >
+          }>
           <Posts limit={8} />
         </Suspense>
       </div>

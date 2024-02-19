@@ -60,8 +60,7 @@ export default function Form({
           }
         });
       }}
-      className="rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-black"
-    >
+      className="rounded-lg border border-stone-200 bg-white dark:border-stone-700 dark:bg-black">
       <div className="relative flex flex-col space-y-4 p-5 sm:p-10">
         <h2 className="font-cal text-xl dark:text-white">{title}</h2>
         <p className="text-sm text-stone-500 dark:text-stone-400">
@@ -77,8 +76,7 @@ export default function Form({
             <select
               name="font"
               defaultValue={inputAttrs.defaultValue}
-              className="w-full rounded-none border-none bg-white px-4 py-2 text-sm font-medium text-stone-700 focus:outline-none focus:ring-black dark:bg-black dark:text-stone-200 dark:focus:ring-white"
-            >
+              className="w-full rounded-none border-none bg-white px-4 py-2 text-sm font-medium text-stone-700 focus:outline-none focus:ring-black dark:bg-black dark:text-stone-200 dark:focus:ring-white">
               <option value="font-cal">Cal Sans</option>
               <option value="font-lora">Lora</option>
               <option value="font-work">Work Sans</option>
@@ -125,7 +123,7 @@ export default function Form({
       {inputAttrs.name === "customDomain" && inputAttrs.defaultValue && (
         <DomainConfiguration domain={inputAttrs.defaultValue} />
       )}
-      <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10">
+      <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10 dark:border-stone-700 dark:bg-stone-800">
         <p className="text-sm text-stone-500 dark:text-stone-400">{helpText}</p>
         <FormButton />
       </div>
@@ -143,8 +141,7 @@ function FormButton() {
           ? "cursor-not-allowed border-stone-200 bg-stone-100 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
           : "border-black bg-black text-white hover:bg-white hover:text-black dark:border-stone-700 dark:hover:border-stone-200 dark:hover:bg-black dark:hover:text-white dark:active:bg-stone-800",
       )}
-      disabled={pending}
-    >
+      disabled={pending}>
       {pending ? <LoadingDots color="#808080" /> : <p>Save Changes</p>}
     </button>
   );

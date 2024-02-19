@@ -9,22 +9,34 @@ export default async function Sites({ limit }: { limit?: number }) {
   if (!session) {
     redirect("/login");
   }
-  const sites = await prisma.site.findMany({
-    where: {
-      user: {
-        id: session.user.id as string,
-      },
-    },
-    orderBy: {
-      createdAt: "asc",
-    },
-    ...(limit ? { take: limit } : {}),
-  });
+
+  const getSites = async () => {
+    try {
+      return await prisma.site.findMany({
+        where: {
+          user: {
+            id: session.user.id as string,
+          },
+        },
+        orderBy: {
+          createdAt: "asc",
+        },
+        ...(limit ? { take: limit } : {}),
+      });
+    } catch (error) {
+      return [];
+    }
+  };
+
+  const sites = await getSites();
 
   return sites.length > 0 ? (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
       {sites.map((site) => (
-        <SiteCard key={site.id} data={site} />
+        <SiteCard
+          key={site.id}
+          data={site}
+        />
       ))}
     </div>
   ) : (

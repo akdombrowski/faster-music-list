@@ -38,8 +38,7 @@ export default function SiteSettingsNav() {
             segment === item.segment
               ? "bg-stone-100 text-stone-600 dark:bg-stone-800 dark:text-stone-400"
               : "text-stone-600 hover:bg-stone-100 dark:text-stone-400 dark:hover:bg-stone-800",
-          )}
-        >
+          )}>
           {item.name}
         </Link>
       ))}

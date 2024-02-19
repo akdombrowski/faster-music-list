@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export default function LoginPage() {
   return (
-    <div className="mx-5 border border-stone-200 py-10 dark:border-stone-700 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md">
+    <div className="mx-5 border border-stone-200 py-10 sm:mx-auto sm:w-full sm:max-w-md sm:rounded-lg sm:shadow-md dark:border-stone-700">
       <Image
         alt="Platforms Starter Kit"
         width={100}
@@ -21,8 +21,7 @@ export default function LoginPage() {
           className="font-medium text-black hover:text-stone-800 dark:text-stone-300 dark:hover:text-stone-100"
           href="https://vercel.com/blog/platforms-starter-kit"
           rel="noreferrer"
-          target="_blank"
-        >
+          target="_blank">
           Read the announcement.
         </a>
       </p>
@@ -31,8 +30,7 @@ export default function LoginPage() {
         <Suspense
           fallback={
             <div className="my-2 h-10 w-full rounded-md border border-stone-200 bg-stone-100 dark:border-stone-700 dark:bg-stone-800" />
-          }
-        >
+          }>
           <LoginButton />
         </Suspense>
       </div>

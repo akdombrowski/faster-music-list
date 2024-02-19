@@ -14,7 +14,7 @@ export const addDomainToVercel = async (domain: string) => {
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        "Authorization": `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -70,7 +70,7 @@ export const getDomainResponse = async (
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        "Authorization": `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     },
@@ -89,7 +89,7 @@ export const getConfigResponse = async (
     {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        "Authorization": `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     },
@@ -108,7 +108,7 @@ export const verifyDomain = async (
     {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
+        "Authorization": `Bearer ${process.env.AUTH_BEARER_TOKEN}`,
         "Content-Type": "application/json",
       },
     },

@@ -28,8 +28,7 @@ export default function DeleteSiteForm({ siteName }: { siteName: string }) {
           })
           .catch((err: Error) => toast.error(err.message))
       }
-      className="rounded-lg border border-red-600 bg-white dark:bg-black"
-    >
+      className="rounded-lg border border-red-600 bg-white dark:bg-black">
       <div className="relative flex flex-col space-y-4 p-5 sm:p-10">
         <h2 className="font-cal text-xl dark:text-white">Delete Site</h2>
         <p className="text-sm text-stone-500 dark:text-stone-400">
@@ -47,7 +46,7 @@ export default function DeleteSiteForm({ siteName }: { siteName: string }) {
         />
       </div>
 
-      <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 dark:border-stone-700 dark:bg-stone-800 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10">
+      <div className="flex flex-col items-center justify-center space-y-2 rounded-b-lg border-t border-stone-200 bg-stone-50 p-3 sm:flex-row sm:justify-between sm:space-y-0 sm:px-10 dark:border-stone-700 dark:bg-stone-800">
         <p className="text-center text-sm text-stone-500 dark:text-stone-400">
           This action is irreversible. Please proceed with caution.
         </p>
@@ -69,8 +68,7 @@ function FormButton() {
           ? "cursor-not-allowed border-stone-200 bg-stone-100 text-stone-400 dark:border-stone-700 dark:bg-stone-800 dark:text-stone-300"
           : "border-red-600 bg-red-600 text-white hover:bg-white hover:text-red-600 dark:hover:bg-transparent",
       )}
-      disabled={pending}
-    >
+      disabled={pending}>
       {pending ? <LoadingDots color="#808080" /> : <p>Confirm Delete</p>}
     </button>
   );

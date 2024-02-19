@@ -23,8 +23,7 @@ export default function AllSites({ params }: { params: { id: string } }) {
                 <PlaceholderCard key={i} />
               ))}
             </div>
-          }
-        >
+          }>
           {/* @ts-expect-error Server Component */}
           <Sites siteId={decodeURIComponent(params.id)} />
         </Suspense>

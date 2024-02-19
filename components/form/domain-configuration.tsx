@@ -18,8 +18,7 @@ export const InlineSnippet = ({
       className={cn(
         "inline-block rounded-md bg-blue-100 px-1 py-0.5 font-mono text-blue-900 dark:bg-blue-900 dark:text-blue-100",
         className,
-      )}
-    >
+      )}>
       {children}
     </span>
   );
@@ -106,8 +105,7 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
                 recordType == "A"
                   ? "border-black text-black dark:border-white dark:text-white"
                   : "border-white text-stone-400 dark:border-black dark:text-stone-600"
-              } ease border-b-2 pb-1 text-sm transition-all duration-150`}
-            >
+              } ease border-b-2 pb-1 text-sm transition-all duration-150`}>
               A Record{!subdomain && " (recommended)"}
             </button>
             <button
@@ -117,8 +115,7 @@ export default function DomainConfiguration({ domain }: { domain: string }) {
                 recordType == "CNAME"
                   ? "border-black text-black dark:border-white dark:text-white"
                   : "border-white text-stone-400 dark:border-black dark:text-stone-600"
-              } ease border-b-2 pb-1 text-sm transition-all duration-150`}
-            >
+              } ease border-b-2 pb-1 text-sm transition-all duration-150`}>
               CNAME Record{subdomain && " (recommended)"}
             </button>
           </div>
