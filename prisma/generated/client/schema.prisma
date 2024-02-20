@@ -8,9 +8,9 @@
 
 datasource db {
   provider  = "postgresql"
-  url       = env("SUPABASE_TRANSACTION_CONNECTION_STRING")
+  // url       = env("SUPABASE_TRANSACTION_CONNECTION_STRING")
   directUrl = env("SUPABASE_SESSION_CONNECTION_STRING")
-  // url      = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
 }
 
 generator client {
