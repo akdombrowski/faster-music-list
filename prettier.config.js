@@ -11,5 +11,5 @@ module.exports = {
   proseWrap: "always",
   quoteProps: "consistent",
   singleAttributePerLine: false,
-  plugins: ["prettier-plugin-tailwindcss"],
+  plugins: ["prettier-plugin-tailwindcss", "prettier-plugin-prisma"],
 };
