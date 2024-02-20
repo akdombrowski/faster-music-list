@@ -1,5 +1,5 @@
 {
-  "name": "prisma-client-c519e00a6227d67aadf1ee4e91a21df9a1b851ce667e13add259ae09f608f487",
+  "name": "prisma-client-2a6867295f491ada4becbba7f9ebf925195817f861ad25051ae651a8c5b9ca4f",
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "index-browser.js",
@@ -66,8 +66,13 @@
       "import": "./runtime/binary.js",
       "default": "./runtime/binary.js"
     },
+    "./generator-build": {
+      "require": "./generator-build/index.js",
+      "import": "./generator-build/index.js",
+      "default": "./generator-build/index.js"
+    },
     "./*": "./*"
   },
-  "version": "5.9.1",
+  "version": "5.10.0",
   "sideEffects": false
 }

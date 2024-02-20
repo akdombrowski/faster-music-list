@@ -42,15 +42,22 @@ export const middleware = async (req: NextRequest) => {
   // rewrites for app pages
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     console.log();
+    console.log();
     console.log("getting token...");
-    console.log("headers:", req.headers);
     console.log("cookies:", req.cookies.toString());
+    console.log();
     console.log("href:", req.nextUrl.href);
+    console.log();
     console.log("origin:", req.nextUrl.origin);
+    console.log();
     console.log("pathname:", req.nextUrl.pathname);
+    console.log();
     console.log("host:", req.nextUrl.host);
+    console.log();
     console.log("hostname:", req.nextUrl.hostname);
+    console.log();
     console.log("searchParams:", req.nextUrl.searchParams.toString());
+    console.log();
     console.log();
     const session = await getToken({ req });
     if (!session && path !== "/login") {
@@ -60,6 +67,7 @@ export const middleware = async (req: NextRequest) => {
       console.log("path:", path);
       console.log("redirecting to /login");
       console.log();
+      console.log();
 
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {
@@ -68,6 +76,7 @@ export const middleware = async (req: NextRequest) => {
       console.log("session:", session);
       console.log("path:", path);
       console.log("redirecting to /");
+      console.log();
       console.log();
       return NextResponse.redirect(new URL("/", req.url));
     }
@@ -79,6 +88,7 @@ export const middleware = async (req: NextRequest) => {
       "rewriting to:",
       new URL(`/app${path === "/" ? "" : path}`, req.url).href,
     );
+    console.log();
     console.log();
 
     // Could be null session and path === /login

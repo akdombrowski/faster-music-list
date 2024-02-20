@@ -297,8 +297,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 5.9.1
-   * Query Engine version: 23fdc5965b1e05fc54e5f26ed3de66776b93de64
+   * Prisma Client JS version: 5.10.0
+   * Query Engine version: 5a9203d0590c951969e85a7d07215503f4672eb9
    */
   export type PrismaVersion = {
     client: string
@@ -1256,6 +1256,16 @@ export namespace Prisma {
      * Read more in our [docs](https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/logging#the-log-option).
      */
     log?: (LogLevel | LogDefinition)[]
+    /**
+     * The default values for transactionOptions
+     * maxWait ?= 2000
+     * timeout ?= 5000
+     */
+    transactionOptions?: {
+      maxWait?: number
+      timeout?: number
+      isolationLevel?: Prisma.TransactionIsolationLevel
+    }
   }
 
   /* Types for Logging */
@@ -3585,6 +3595,7 @@ export namespace Prisma {
     sessionToken: string | null
     userId: string | null
     expires: Date | null
+    error: string | null
   }
 
   export type SessionMaxAggregateOutputType = {
@@ -3592,6 +3603,7 @@ export namespace Prisma {
     sessionToken: string | null
     userId: string | null
     expires: Date | null
+    error: string | null
   }
 
   export type SessionCountAggregateOutputType = {
@@ -3599,6 +3611,7 @@ export namespace Prisma {
     sessionToken: number
     userId: number
     expires: number
+    error: number
     _all: number
   }
 
@@ -3608,6 +3621,7 @@ export namespace Prisma {
     sessionToken?: true
     userId?: true
     expires?: true
+    error?: true
   }
 
   export type SessionMaxAggregateInputType = {
@@ -3615,6 +3629,7 @@ export namespace Prisma {
     sessionToken?: true
     userId?: true
     expires?: true
+    error?: true
   }
 
   export type SessionCountAggregateInputType = {
@@ -3622,6 +3637,7 @@ export namespace Prisma {
     sessionToken?: true
     userId?: true
     expires?: true
+    error?: true
     _all?: true
   }
 
@@ -3702,6 +3718,7 @@ export namespace Prisma {
     sessionToken: string
     userId: string
     expires: Date
+    error: string | null
     _count: SessionCountAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
     _max: SessionMaxAggregateOutputType | null
@@ -3726,6 +3743,7 @@ export namespace Prisma {
     sessionToken?: boolean
     userId?: boolean
     expires?: boolean
+    error?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
@@ -3734,6 +3752,7 @@ export namespace Prisma {
     sessionToken?: boolean
     userId?: boolean
     expires?: boolean
+    error?: boolean
   }
 
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3751,6 +3770,7 @@ export namespace Prisma {
       sessionToken: string
       userId: string
       expires: Date
+      error: string | null
     }, ExtArgs["result"]["session"]>
     composites: {}
   }
@@ -4150,6 +4170,7 @@ export namespace Prisma {
     readonly sessionToken: FieldRef<"Session", 'String'>
     readonly userId: FieldRef<"Session", 'String'>
     readonly expires: FieldRef<"Session", 'DateTime'>
+    readonly error: FieldRef<"Session", 'String'>
   }
     
 
@@ -8391,7 +8412,8 @@ export namespace Prisma {
     id: 'id',
     sessionToken: 'sessionToken',
     userId: 'userId',
-    expires: 'expires'
+    expires: 'expires',
+    error: 'error'
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -8751,6 +8773,7 @@ export namespace Prisma {
     sessionToken?: StringFilter<"Session"> | string
     userId?: StringFilter<"Session"> | string
     expires?: DateTimeFilter<"Session"> | Date | string
+    error?: StringNullableFilter<"Session"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
   }
 
@@ -8759,6 +8782,7 @@ export namespace Prisma {
     sessionToken?: SortOrder
     userId?: SortOrder
     expires?: SortOrder
+    error?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -8770,6 +8794,7 @@ export namespace Prisma {
     NOT?: SessionWhereInput | SessionWhereInput[]
     userId?: StringFilter<"Session"> | string
     expires?: DateTimeFilter<"Session"> | Date | string
+    error?: StringNullableFilter<"Session"> | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
   }, "id" | "sessionToken">
 
@@ -8778,6 +8803,7 @@ export namespace Prisma {
     sessionToken?: SortOrder
     userId?: SortOrder
     expires?: SortOrder
+    error?: SortOrderInput | SortOrder
     _count?: SessionCountOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
     _min?: SessionMinOrderByAggregateInput
@@ -8791,6 +8817,7 @@ export namespace Prisma {
     sessionToken?: StringWithAggregatesFilter<"Session"> | string
     userId?: StringWithAggregatesFilter<"Session"> | string
     expires?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    error?: StringNullableWithAggregatesFilter<"Session"> | string | null
   }
 
   export type VerificationTokenWhereInput = {
@@ -9321,6 +9348,7 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+    error?: string | null
     user: UserCreateNestedOneWithoutSessionsInput
   }
 
@@ -9329,12 +9357,14 @@ export namespace Prisma {
     sessionToken: string
     userId: string
     expires: Date | string
+    error?: string | null
   }
 
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSessionsNestedInput
   }
 
@@ -9343,6 +9373,7 @@ export namespace Prisma {
     sessionToken?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateManyInput = {
@@ -9350,12 +9381,14 @@ export namespace Prisma {
     sessionToken: string
     userId: string
     expires: Date | string
+    error?: string | null
   }
 
   export type SessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUncheckedUpdateManyInput = {
@@ -9363,6 +9396,7 @@ export namespace Prisma {
     sessionToken?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type VerificationTokenCreateInput = {
@@ -10001,6 +10035,7 @@ export namespace Prisma {
     sessionToken?: SortOrder
     userId?: SortOrder
     expires?: SortOrder
+    error?: SortOrder
   }
 
   export type SessionMaxOrderByAggregateInput = {
@@ -10008,6 +10043,7 @@ export namespace Prisma {
     sessionToken?: SortOrder
     userId?: SortOrder
     expires?: SortOrder
+    error?: SortOrder
   }
 
   export type SessionMinOrderByAggregateInput = {
@@ -10015,6 +10051,7 @@ export namespace Prisma {
     sessionToken?: SortOrder
     userId?: SortOrder
     expires?: SortOrder
+    error?: SortOrder
   }
 
   export type VerificationTokenIdentifierTokenCompoundUniqueInput = {
@@ -10808,12 +10845,14 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+    error?: string | null
   }
 
   export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
     sessionToken: string
     expires: Date | string
+    error?: string | null
   }
 
   export type SessionCreateOrConnectWithoutUserInput = {
@@ -10967,6 +11006,7 @@ export namespace Prisma {
     sessionToken?: StringFilter<"Session"> | string
     userId?: StringFilter<"Session"> | string
     expires?: DateTimeFilter<"Session"> | Date | string
+    error?: StringNullableFilter<"Session"> | string | null
   }
 
   export type SiteUpsertWithWhereUniqueWithoutUserInput = {
@@ -11497,6 +11537,7 @@ export namespace Prisma {
     id?: string
     sessionToken: string
     expires: Date | string
+    error?: string | null
   }
 
   export type SiteCreateManyUserInput = {
@@ -11583,18 +11624,21 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     sessionToken?: StringFieldUpdateOperationsInput | string
     expires?: DateTimeFieldUpdateOperationsInput | Date | string
+    error?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SiteUpdateWithoutUserInput = {
