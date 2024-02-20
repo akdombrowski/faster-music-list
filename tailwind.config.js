@@ -7,13 +7,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./lib/**/*.{js,ts,jsx,tsx}",
-    "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}", // Tremor module
   ],
   theme: {
     extend: {
       colors: {
         // light mode
-        "tremor": {
+        "light": {
           brand: {
             faint: "#eff6ff", // blue-50
             muted: "#bfdbfe", // blue-200
@@ -43,7 +42,7 @@ module.exports = {
           },
         },
         // dark mode
-        "dark-tremor": {
+        "dark": {
           brand: {
             faint: "#0B1229", // custom
             muted: "#172554", // blue-950
@@ -75,28 +74,28 @@ module.exports = {
       },
       boxShadow: {
         // light
-        "tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        "tremor-card":
+        "input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "card":
           "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        "tremor-dropdown":
+        "dropdown":
           "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
         // dark
-        "dark-tremor-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
-        "dark-tremor-card":
+        "dark-input": "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+        "dark-card":
           "0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1)",
-        "dark-tremor-dropdown":
+        "dark-dropdown":
           "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       },
       borderRadius: {
-        "tremor-small": "0.375rem",
-        "tremor-default": "0.5rem",
-        "tremor-full": "9999px",
+        "small": "0.375rem",
+        "default": "0.5rem",
+        "full": "9999px",
       },
       fontSize: {
-        "tremor-label": ["0.75rem"],
-        "tremor-default": ["0.875rem", { lineHeight: "1.25rem" }],
-        "tremor-title": ["1.125rem", { lineHeight: "1.75rem" }],
-        "tremor-metric": ["1.875rem", { lineHeight: "2.25rem" }],
+        "label": ["0.75rem"],
+        "default": ["0.875rem", { lineHeight: "1.25rem" }],
+        "title": ["1.125rem", { lineHeight: "1.75rem" }],
+        "metric": ["1.875rem", { lineHeight: "2.25rem" }],
       },
       width: {
         1536: "1536px",

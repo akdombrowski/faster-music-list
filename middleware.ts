@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { auth } from "@/lib/auth";
 
 export const config = {
   matcher: [
@@ -14,7 +15,7 @@ export const config = {
   ],
 };
 
-export default async function middleware(req: NextRequest) {
+export default auth(async (req: NextRequest) => {
   const url = req.nextUrl;
 
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
@@ -42,10 +43,29 @@ export default async function middleware(req: NextRequest) {
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     const session = await getToken({ req });
     if (!session && path !== "/login") {
+      console.log("!session && path !== '/login'");
+      console.log("session:", session);
+      console.log("path:", path);
+      console.log("redirecting to /login");
+
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {
+      console.log("session && path == '/login'");
+      console.log("session:", session);
+      console.log("path:", path);
+      console.log("redirecting to /");
       return NextResponse.redirect(new URL("/", req.url));
     }
+
+    console.log("session:", session);
+    console.log("path:", path);
+    console.log(
+      "rewriting to:",
+      new URL(`/app${path === "/" ? "" : path}`, req.url).href,
+    );
+
+    // Could be null session and path === /login
+    // Could be a session and path !== /login
     return NextResponse.rewrite(
       new URL(`/app${path === "/" ? "" : path}`, req.url),
     );
@@ -70,4 +90,4 @@ export default async function middleware(req: NextRequest) {
 
   // rewrite everything else to `/[domain]/[slug] dynamic route
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
-}
+});

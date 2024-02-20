@@ -1,31 +1,27 @@
-import SpotifyUser, {
-  Awaitable,
-  getServerSession,
-  User,
-  type NextAuthOptions,
-} from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
+import { AuthOptions, getServerSession, type NextAuthOptions } from "next-auth";
 import SpotifyProvider from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
+import NextAuth from "next-auth";
+import type { NextRequest } from "next/server";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
-export const authOptions: NextAuthOptions = {
+export const authOptions: AuthOptions = {
   providers: [
-    GitHubProvider({
-      clientId: process.env.AUTH_GITHUB_ID as string,
-      clientSecret: process.env.AUTH_GITHUB_SECRET as string,
-      profile(profile) {
-        return {
-          id: profile.id.toString(),
-          name: profile.name || profile.login,
-          gh_username: profile.login,
-          email: profile.email,
-          image: profile.avatar_url,
-        };
-      },
-    }),
+    // GitHubProvider({
+    //   clientId: process.env.AUTH_GITHUB_ID as string,
+    //   clientSecret: process.env.AUTH_GITHUB_SECRET as string,
+    //   profile(profile) {
+    //     return {
+    //       id: profile.id.toString(),
+    //       name: profile.name || profile.login,
+    //       gh_username: profile.login,
+    //       email: profile.email,
+    //       image: profile.avatar_url,
+    //     };
+    //   },
+    // }),
     SpotifyProvider({
       clientId: process.env.AUTH_SPOTIFY_ID as string,
       clientSecret: process.env.AUTH_SPOTIFY_SECRET as string,
@@ -69,20 +65,22 @@ export const authOptions: NextAuthOptions = {
     },
   },
   callbacks: {
-    jwt: async ({ token, user }) => {
+    jwt: async ({ token, user, account, profile }) => {
       if (user) {
         token.user = user;
       }
       return token;
     },
+
     session: async ({ session, token }) => {
       session.user = {
         ...session.user,
         // @ts-expect-error
-        id: token.sub,
+        sub: token.sub,
         // @ts-expect-error
-        username: token?.user?.username || token?.user?.gh_username,
+        username: token?.user?.display_name || token?.user?.email,
       };
+
       return session;
     },
   },
@@ -92,10 +90,10 @@ export function getSession() {
   return getServerSession(authOptions) as Promise<{
     user: {
       id: string;
-      name: string;
+      sub: string;
       username: string;
       email: string;
-      image: string;
+      image: [];
     };
   } | null>;
 }
@@ -156,3 +154,5 @@ export function withPostAuth(action: any) {
     return action(formData, post, key);
   };
 }
+
+export const { handlers, auth } = NextAuth(authOptions);
