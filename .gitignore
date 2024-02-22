@@ -172,3 +172,5 @@ dist
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+# Sentry Config File
+.sentryclirc
