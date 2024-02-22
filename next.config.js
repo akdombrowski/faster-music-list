@@ -6,6 +6,7 @@ module.exports = {
     serverActions: {
       allowedOrigins: ["app.localhost:3000"],
     },
+    instrumentationHook: true,
   },
   images: {
     remotePatterns: [
