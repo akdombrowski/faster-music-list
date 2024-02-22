@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { auth } from "./auth";
 // import { withAuth} from "next-auth/middleware";
 
 export const config = {
@@ -15,7 +16,8 @@ export const config = {
   ],
 };
 
-export const middleware = async (req: NextRequest) => {
+export default auth(async (req: NextRequest) => {
+  // req.auth
   const url = req.nextUrl;
 
   // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
@@ -59,7 +61,9 @@ export const middleware = async (req: NextRequest) => {
     console.log("searchParams:", req.nextUrl.searchParams.toString());
     console.log();
     console.log();
-    const session = await getToken({ req });
+
+    const session = await auth(req);
+
     if (!session && path !== "/login") {
       console.log();
       console.log("!session && path !== '/login'");
@@ -117,6 +121,4 @@ export const middleware = async (req: NextRequest) => {
 
   // rewrite everything else to `/[domain]/[slug] dynamic route
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
-};
-
-export default middleware;
+});

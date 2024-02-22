@@ -1,19 +1,13 @@
-import {
-  AuthOptions,
-  getServerSession,
-  TokenSet,
-  type NextAuthOptions,
-} from "next-auth";
-import SpotifyProvider from "next-auth/providers/spotify";
+import Spotify from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
-import NextAuth from "next-auth";
-import type { NextRequest } from "next/server";
+import NextAuth, { type NextAuthConfig } from "next-auth";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
 // const prisma = new PrismaClient();
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthConfig = {
   providers: [
     // GitHubProvider({
     //   clientId: process.env.AUTH_GITHUB_ID as string,
@@ -28,7 +22,7 @@ export const authOptions: AuthOptions = {
     //     };
     //   },
     // }),
-    SpotifyProvider({
+    Spotify({
       clientId: process.env.AUTH_SPOTIFY_ID as string,
       clientSecret: process.env.AUTH_SPOTIFY_SECRET as string,
       authorization: {
@@ -111,7 +105,7 @@ export const authOptions: AuthOptions = {
             method: "POST",
           });
 
-          const tokens: TokenSet = await response.json();
+          const tokens = await response.json();
 
           if (!response.ok) throw tokens;
 
@@ -139,7 +133,7 @@ export const authOptions: AuthOptions = {
         } catch (error) {
           console.error("Error refreshing access token", error);
           // The error property will be used client-side to handle the refresh token error
-          session.error = "RefreshAccessTokenError";
+          // session.error = "RefreshAccessTokenError";
         }
       }
       return session;
@@ -156,16 +150,9 @@ export const authOptions: AuthOptions = {
   },
 };
 
-export function getSession() {
-  return getServerSession(authOptions) as Promise<{
-    user: {
-      id: string;
-      sub: string;
-      username: string;
-      email: string;
-      image: [];
-    };
-  } | null>;
+export async function getSession() {
+  const session = await auth();
+  return session;
 }
 
 export function withSiteAuth(action: any) {
@@ -180,6 +167,11 @@ export function withSiteAuth(action: any) {
         error: "Not authenticated",
       };
     }
+
+    if (!session.user) {
+      return { error: "no user for this session" };
+    }
+
     const site = await prisma.site.findUnique({
       where: {
         id: siteId,
@@ -202,7 +194,7 @@ export function withPostAuth(action: any) {
     key: string | null,
   ) => {
     const session = await getSession();
-    if (!session?.user.id) {
+    if (!session?.user?.id) {
       return {
         error: "Not authenticated",
       };
@@ -225,4 +217,7 @@ export function withPostAuth(action: any) {
   };
 }
 
-export const { handlers, auth } = NextAuth(authOptions);
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth(authOptions);
