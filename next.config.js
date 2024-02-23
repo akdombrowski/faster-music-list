@@ -6,7 +6,6 @@ module.exports = {
     serverActions: {
       allowedOrigins: ["app.localhost:3000"],
     },
-    instrumentationHook: true,
   },
   images: {
     remotePatterns: [
@@ -22,7 +21,6 @@ module.exports = {
     ],
   },
 };
-
 
 // Injected content via Sentry wizard below
 
@@ -63,5 +61,5 @@ module.exports = withSentryConfig(
     // https://docs.sentry.io/product/crons/
     // https://vercel.com/docs/cron-jobs
     automaticVercelMonitors: true,
-  }
+  },
 );

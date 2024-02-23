@@ -3,27 +3,28 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import LogoutButton from "./logout-button";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 
 export default function Profile() {
   // const session = await getSession();
   // if (!session?.user) {
   //   redirect("/login");
   // }
-  const { status, data: session } = useSession({
-    required: true,
-    onUnauthenticated() {
-      redirect("/login");
-      // The user is not authenticated, handle it here.
-    },
-  });
+  // const { status, data: session } = useSession({
+  //   required: true,
+  //   onUnauthenticated() {
+  //     redirect("/login");
+  //     // The user is not authenticated, handle it here.
+  //   },
+  // });
 
   return (
     <div className="flex w-full items-center justify-between">
       <Link
         href="/settings"
         className="flex w-full flex-1 items-center space-x-3 rounded-lg px-2 py-1.5 transition-all duration-150 ease-in-out hover:bg-stone-200 active:bg-stone-300 dark:text-white dark:hover:bg-stone-700 dark:active:bg-stone-800">
-        <Image
+        <span>USER</span>
+        {/* <Image
           src={
             session?.user?.image ??
             `https://avatar.vercel.sh/${session?.user?.email}`
@@ -35,7 +36,7 @@ export default function Profile() {
         />
         <span className="truncate text-sm font-medium">
           {session?.user?.name}
-        </span>
+        </span> */}
       </Link>
       <LogoutButton />
     </div>

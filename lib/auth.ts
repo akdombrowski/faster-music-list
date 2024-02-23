@@ -1,13 +1,15 @@
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Spotify from "next-auth/providers/spotify";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import prisma from "@/lib/prisma";
-import NextAuth, { type NextAuthConfig } from "next-auth";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
-// const prisma = new PrismaClient();
-export const authOptions: NextAuthConfig = {
+export const {
+  handlers: { GET, POST },
+  auth,
+} = NextAuth({
   providers: [
     // GitHubProvider({
     //   clientId: process.env.AUTH_GITHUB_ID as string,
@@ -42,28 +44,8 @@ export const authOptions: NextAuthConfig = {
       },
     }),
   ],
-  pages: {
-    signIn: `/login`,
-    verifyRequest: `/login`,
-    error: "/login", // Error code passed in query string as ?error=
-  },
   adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
-  cookies: {
-    sessionToken: {
-      name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
-      options: {
-        httpOnly: true,
-        sameSite: "lax",
-        path: "/",
-        // When working on localhost, the cookie domain must be omitted entirely (https://stackoverflow.com/a/1188145)
-        domain: VERCEL_DEPLOYMENT
-          ? `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
-          : undefined,
-        secure: VERCEL_DEPLOYMENT,
-      },
-    },
-  },
   callbacks: {
     async redirect({ url, baseUrl }) {
       console.log("*********************");
@@ -148,76 +130,4 @@ export const authOptions: NextAuthConfig = {
       return true;
     },
   },
-};
-
-export async function getSession() {
-  const session = await auth();
-  return session;
-}
-
-export function withSiteAuth(action: any) {
-  return async (
-    formData: FormData | null,
-    siteId: string,
-    key: string | null,
-  ) => {
-    const session = await getSession();
-    if (!session) {
-      return {
-        error: "Not authenticated",
-      };
-    }
-
-    if (!session.user) {
-      return { error: "no user for this session" };
-    }
-
-    const site = await prisma.site.findUnique({
-      where: {
-        id: siteId,
-      },
-    });
-    if (!site || site.userId !== session.user.id) {
-      return {
-        error: "Not authorized",
-      };
-    }
-
-    return action(formData, site, key);
-  };
-}
-
-export function withPostAuth(action: any) {
-  return async (
-    formData: FormData | null,
-    postId: string,
-    key: string | null,
-  ) => {
-    const session = await getSession();
-    if (!session?.user?.id) {
-      return {
-        error: "Not authenticated",
-      };
-    }
-    const post = await prisma.post.findUnique({
-      where: {
-        id: postId,
-      },
-      include: {
-        site: true,
-      },
-    });
-    if (!post || post.userId !== session.user.id) {
-      return {
-        error: "Post not found",
-      };
-    }
-
-    return action(formData, post, key);
-  };
-}
-
-export const {
-  handlers: { GET, POST },
-  auth,
-} = NextAuth(authOptions);
+});
