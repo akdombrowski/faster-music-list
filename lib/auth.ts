@@ -44,7 +44,7 @@ export const {
       },
     }),
   ],
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   session: { strategy: "jwt" },
   callbacks: {
     async redirect({ url, baseUrl }) {

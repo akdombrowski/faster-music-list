@@ -6,8 +6,14 @@ import { placeholderBlurhash, toDateString } from "@/lib/utils";
 import BlogCard from "@/components/blog-card";
 import { getPostsForSite, getSiteData } from "@/lib/fetchers";
 import Image from "next/image";
+import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server";
 
 export async function generateStaticParams() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    NextResponse.redirect("/login");
+  }
   const allSites = await prisma.site.findMany({
     select: {
       subdomain: true,
@@ -80,7 +86,7 @@ export default async function SiteHomePage({
                         width={100}
                         height={100}
                         className="h-full w-full object-cover"
-                        src={data.user?.image}
+                        src={data.user?.image[0]}
                       />
                     ) : (
                       <div className="absolute flex h-full w-full select-none items-center justify-center bg-stone-100 text-4xl text-stone-500">
